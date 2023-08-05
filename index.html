@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Newsletter-sign-up-with-success</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        .bg-dark-slate-grey {
+            background-color: hsl(234, 29%, 20%);
+        }
+
+        .bg-charchole-gray {
+            background-color: hsl(235, 18%, 26%);
+
+        }
+
+        @media (max-width:640px) {
+            .bg-charchole-gray {
+                background-color: white;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class=" min-h-screen bg-charchole-gray flex  justify-center items-center">
+        <div id="signupform"
+            class="pb-20 sm:pb-0 bg-white  sm:rounded-[30px] flex flex-col-reverse sm:flex-row max-w-[800px]">
+            <div class="w-[90%] mx-auto sm:mx-[unset] sm:w-[60%]  sm:px-10 text-[16px] leading-[120%] self-center ">
+
+                <h1 class="text-3xl sm:text-5xl font-bold ">Stay updated!</h1>
+                <p class="mt-5">Join 60,000+ product managers receiving monthly updates on:</p>
+
+                <ul class="mt-8">
+                    <li class="flex">
+                        <img src="/assets/images/icon-list.svg" alt="list" class="self-start inline mr-2">
+                        <span class="self-start">discovery and building what matters</span>
+                    </li>
+                    <li class="mt-4 flex">
+                        <img src="/assets/images/icon-list.svg" alt="list" class="self-start inline mr-2">
+                        <span class="self-start"> to ensureupdates are a success </span>
+                    </li>
+                    <li class="mt-4 flex">
+                        <img src="/assets/images/icon-list.svg" alt="list" class="self-start inline mr-2">
+                        <span class="self-start"> And much more! </span>
+                    </li>
+                </ul>
+                <div class="flex justify-between mt-8">
+                    <label class="block text-sm">Email Address</label>
+                    <p id="warning" class="text-[red] text-sm"></p>
+                </div>
+                <input type="text" class="border rounded-md mt-2 block w-full border-gray-400 p-3" id="email">
+
+                <button onClick="signup()"
+                    class="mt-6 text-center bg-dark-slate-grey text-white w-full p-3 rounded-md hover:bg-gradient-to-r hover:from-[#ff6257] hover:to-[#f38925] transition-all ease-in-out duration-300">Subscribe
+                    to monthly newsletter</button>
+            </div>
+            <div class="w-full sm:w-[40%]  ">
+                <img src="/assets/images/illustration-sign-up-mobile.svg" alt="image" class="w-full p-4  sm:hidden">
+                <img src="/assets/images/illustration-sign-up-desktop.svg" alt="image"
+                    class="w-full p-4 hidden sm:block">
+            </div>
+        </div>
+
+        <div id="message" class="bg-white rounded-[30px]  hidden  w-[90%] sm:w-[400px] sm:p-10">
+            <img src="/assets/images/icon-success.svg" alt="tick" class="w-[50px] mb-5">
+            <h1 class="text-3xl sm:text-5xl font-bold ">Thanks for Subscribing!</h1>
+            <p class="mt-5">A confirmation email has bee sent to <strong id="myemail"></strong>. Please open it and
+                click the button inside to confirm your subscription</p>
+            <button onclick="dismiss()"
+                class="mt-[150px] sm:mt-6 text-center bg-dark-slate-grey text-white w-full p-3 rounded-md hover:bg-gradient-to-r hover:from-[#ff6257] hover:to-[#f38925] transition-all ease-in-out duration-300 ">Dismiss
+                message</button>
+        </div>
+    </div>
+    <script>
+        function signup() {
+            const emailInput = document.getElementById("email");
+            const warning = document.getElementById('warning');
+            const signupform = document.getElementById('signupform')
+            const message = document.getElementById('message')
+            const myemail = document.getElementById('myemail')
+            if (!validMail(emailInput?.value)) {
+                warning.textContent = "valid email required"
+                emailInput.style.border = "1px solid red"
+                emailInput.style.background = "rgba(235, 80, 80, 0.142)"
+                emailInput.style.color = "red"
+            } else {
+                warning.textContent = ""
+                emailInput.style.border = "1px solid gray"
+                emailInput.style.background = "none"
+                emailInput.style.color = "black"
+                signupform.style.display = "none"
+                message.style.display = "block"
+                myemail.textContent = emailInput.value
+
+            }
+
+        }
+
+        function dismiss() {
+            const signupform = document.getElementById('signupform')
+            const message = document.getElementById('message')
+            signupform.style.display = "flex"
+            message.style.display = "none"
+        }
+
+        function validMail(mail) {
+            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(mail);
+        }
+
+    </script>
+</body>
+
+</html>
